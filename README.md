@@ -1,4 +1,4 @@
-# NoStrCmpLogicalToggler
+# NoStrCmpLogical Toggler
 *Because a checkbox in the Explorer interface would be too hard.*  
 
 ## Installation and Running  
