@@ -1,6 +1,3 @@
-using Microsoft.Win32;
-using System.Diagnostics;
-
 namespace CmpLogicalToggle {
     internal class CmpLogicalToggler {
         static void Main() {
@@ -8,7 +5,7 @@ namespace CmpLogicalToggle {
             string choice = ( Console.ReadLine() ?? "n" ).ToLower();
 
             if ( choice == "y" ) {
-                object? currVal = Registry.GetValue( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer", "NoStrCmpLogical", 0 );
+                object? currVal = Microsoft.Win32.Registry.GetValue( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer", "NoStrCmpLogical", 0 );
 
                 if ( currVal == null ) {
                     currVal = 0;
@@ -17,18 +14,18 @@ namespace CmpLogicalToggle {
                 int intVal = ( int )currVal;
 
                 if ( intVal == 1 ) {
-                    Registry.SetValue( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer", "NoStrCmpLogical", 0 );
+                    Microsoft.Win32.Registry.SetValue( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer", "NoStrCmpLogical", 0 );
                     Console.WriteLine( "NoStrCmpLogical has been turned OFF." );
                 } else {
-                    Registry.SetValue( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer", "NoStrCmpLogical", 1 );
+                    Microsoft.Win32.Registry.SetValue( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer", "NoStrCmpLogical", 1 );
                     Console.WriteLine( "NoStrCmpLogical has been turned ON." );
                 }
 
-                Process proc = Process.GetProcessesByName( "explorer" )[ 0 ];
+                System.Diagnostics.Process proc = System.Diagnostics.Process.GetProcessesByName( "explorer" )[ 0 ];
                 proc.Kill();
                 if ( proc.MainModule != null ) {
                     string path = proc.MainModule.FileName;
-                    Process.Start( path );
+                    System.Diagnostics.Process.Start( path );
                 }
             }
 
