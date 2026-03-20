@@ -1,6 +1,9 @@
 # NoStrCmpLogical Toggler
 *Because a checkbox in the Explorer interface would be too hard.*  
 
+## Summary
+This small program toggles the state of the NoStrCmpLogical registry value on Windows machines.
+
 ## Installation and Running  
 Check the Releases tab on the right and download it.  
 The program must be run with administrator privileges.  
